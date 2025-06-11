@@ -1,6 +1,6 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const express = require('express');
+const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -8,21 +8,27 @@ const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
 app.use(express.json());
 
-app.post('/webhook', (req, res) => {
-  console.log('Notificación recibida:', req.body);
+app.post("/webhook", (req, res) => {
+  console.log("Notificación recibida:", req.body);
   res.sendStatus(200);
 });
 
-app.get('/', (req, res) => {
-  const mode = req.query['hub.mode'];
-  const token = req.query['hub.verify_token'];
-  const challenge = req.query['hub.challenge'];
+app.get("/", (req, res) => {
+  const mode = req.query["hub.mode"];
+  const token = req.query["hub.verify_token"];
+  const challenge = req.query["hub.challenge"];
 
-  if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-    console.log('Webhook verificado con éxito');
+  console.log("Petición de verificación recibida:");
+  console.log("mode:", mode);
+  console.log("token enviado por Meta:", token);
+  console.log("token esperado (env):", VERIFY_TOKEN);
+  console.log("challenge:", challenge);
+
+  if (mode === "subscribe" && token === VERIFY_TOKEN) {
+    console.log("Webhook verificado con éxito");
     res.status(200).send(challenge);
   } else {
-    console.warn('Intento de verificación fallido');
+    console.warn("Intento de verificación fallido");
     res.sendStatus(403);
   }
 });
