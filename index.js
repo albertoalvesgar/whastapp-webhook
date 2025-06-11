@@ -4,6 +4,8 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+
 app.use(express.json());
 
 app.post('/webhook', (req, res) => {
