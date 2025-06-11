@@ -6,8 +6,6 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
 
-const VERIFY_TOKEN = "Z71llJvFzhUaVxAiuwBTURVBtgZfAB6YGVjQSGFW";
-
 app.post('/webhook', (req, res) => {
   console.log('Notificación recibida:', req.body);
   res.sendStatus(200);
