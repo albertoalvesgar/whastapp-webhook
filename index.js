@@ -18,12 +18,6 @@ app.get("/", (req, res) => {
   const token = req.query["hub.verify_token"];
   const challenge = req.query["hub.challenge"];
 
-  console.log("Petición de verificación recibida:");
-  console.log("mode:", mode);
-  console.log("token enviado por Meta:", token);
-  console.log("token esperado (env):", VERIFY_TOKEN);
-  console.log("challenge:", challenge);
-
   if (mode === "subscribe" && token === VERIFY_TOKEN) {
     console.log("Webhook verificado con éxito");
     res.status(200).send(challenge);
