@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const PORT = 3001;
 
-//const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
 app.use(express.json());
 
