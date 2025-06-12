@@ -11,13 +11,13 @@ app.use(express.json());
 app.post("/webhook", async (req, res) => {
   console.log("Notificación recibida:", JSON.stringify(req.body, null, 2));
 
-  try {
+  /*try {
     await axios.post(BACKEND_URL, req.body);
     res.sendStatus(200);
   } catch (error) {
     console.error("Error reenviando a .NET:", error.message);
     res.sendStatus(500);
-  }
+  }*/
 });
 
 app.get("/", (req, res) => {
