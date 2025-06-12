@@ -8,9 +8,16 @@ const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
 app.use(express.json());
 
-app.post("/webhook", (req, res) => {
-  console.log("Notificación recibida:", req.body);
-  res.sendStatus(200);
+app.post("/webhook", async (req, res) => {
+  console.log("Notificación recibida:", JSON.stringify(req.body, null, 2));
+
+  try {
+    await axios.post(BACKEND_URL, req.body);
+    res.sendStatus(200);
+  } catch (error) {
+    console.error("Error reenviando a .NET:", error.message);
+    res.sendStatus(500);
+  }
 });
 
 app.get("/", (req, res) => {
